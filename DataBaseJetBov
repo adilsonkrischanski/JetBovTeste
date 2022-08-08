@@ -1,0 +1,140 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+
+-- Started on 2022-08-08 17:16:07 -03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 202 (class 1259 OID 25347)
+-- Name: cattles; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cattles (
+    earringnumber integer NOT NULL,
+    farmid integer NOT NULL,
+    weight real NOT NULL,
+    breed character varying(10) NOT NULL,
+    idealweight real NOT NULL,
+    zoneid integer NOT NULL,
+    inputdatefarm character varying(10) NOT NULL,
+    birth character varying(10) NOT NULL,
+    inputdatezone character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.cattles OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 25350)
+-- Name: farms; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.farms (
+    farmid integer NOT NULL,
+    location character varying(20) NOT NULL,
+    farmname character varying(15) NOT NULL
+);
+
+
+ALTER TABLE public.farms OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 25353)
+-- Name: zones; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.zones (
+    farmid integer NOT NULL,
+    zoneid integer NOT NULL,
+    gmd real NOT NULL,
+    recoverytime integer NOT NULL,
+    amountcattlesuported integer NOT NULL,
+    lastexit character varying(10),
+    inputzone character varying(10)
+);
+
+
+ALTER TABLE public.zones OWNER TO postgres;
+
+--
+-- TOC entry 2972 (class 0 OID 25347)
+-- Dependencies: 202
+-- Data for Name: cattles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.cattles VALUES (3322, 1, 1029.6, 'ANGUS', 460, 3, '01/12/2020', '10/08/2020', '01/10/2021');
+INSERT INTO public.cattles VALUES (1122, 1, 1174.2, 'NELORI', 400, 3, '01/01/2020', '09/12/2019', '01/10/2021');
+INSERT INTO public.cattles VALUES (2211, 1, 1133.5, 'NELORI', 400, 3, '01/01/2020', '07/08/2019', '01/10/2021');
+
+
+--
+-- TOC entry 2973 (class 0 OID 25350)
+-- Dependencies: 203
+-- Data for Name: farms; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.farms VALUES (1, 'JOINVILLE', 'FARM1');
+INSERT INTO public.farms VALUES (2, 'JARAGUA', 'FARM2');
+
+
+--
+-- TOC entry 2974 (class 0 OID 25353)
+-- Dependencies: 204
+-- Data for Name: zones; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.zones VALUES (1, 3, 2.4, 18, 23, '01/12/2020', '01/10/2021');
+INSERT INTO public.zones VALUES (1, 1, 0.9, 13, 10, '01/10/2021', '01/11/2020');
+
+
+--
+-- TOC entry 2841 (class 2606 OID 25357)
+-- Name: cattles Cattles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cattles
+    ADD CONSTRAINT "Cattles_pkey" PRIMARY KEY (earringnumber);
+
+
+--
+-- TOC entry 2843 (class 2606 OID 25359)
+-- Name: farms Farms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.farms
+    ADD CONSTRAINT "Farms_pkey" PRIMARY KEY (farmid);
+
+
+--
+-- TOC entry 2845 (class 2606 OID 25361)
+-- Name: zones zoness_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.zones
+    ADD CONSTRAINT zoness_pkey PRIMARY KEY (farmid, zoneid);
+
+
+-- Completed on 2022-08-08 17:16:07 -03
+
+--
+-- PostgreSQL database dump complete
+--
+
